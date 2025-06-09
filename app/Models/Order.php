@@ -12,5 +12,15 @@ class Order extends Model
     protected $table = 'orders';
     protected $primaryKey = 'id';
     protected $fillable = ['id', 'date', 'time', 'created_at', 'updated_at'];
+    protected $appends = ['date_time'];
+
+    public function getDateTimeAttribute()
+    {
+        if ($this->date && $this->time) {
+            return "{$this->date} {$this->time}";
+        }
+
+        return null;
+    }
     
 }

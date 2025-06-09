@@ -7,10 +7,11 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function index(Request $request): object
+    public function index(ProductInterface $productInterface, Request $request): object
     {
+        $res = $productInterface->index($request);
         
-        return response()->json('test');
+        return response()->json($res);
     }
 
     public function store(ProductInterface $productInterface, Request $request): object

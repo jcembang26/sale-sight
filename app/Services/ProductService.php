@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Interfaces\ProductInterface;
+use App\Models\OrderDetail;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,6 +19,30 @@ class ProductService implements ProductInterface
         $this->rules = [
             'requiredMinString' => 'required|min:1'
         ];
+    }
+
+    public function index(Request $request): object
+    {
+        $perPage = $request->perPage ?? 10;
+
+        return Product::select([
+            'product_id',
+            'product_type_id',
+            'size_id',
+            'price',
+        ])
+        ->with([
+            'productType:product_type_id,name,category_id',
+            'productType.ingredients:id,name',
+            'orderDetails' => function ($query) {
+                $query->select('id', 'order_id', 'product_id', 'quantity');
+                
+                $query->with(['order' => function ($q) {
+                    $q->select('id', 'date', 'time');
+                }]);
+            }
+        ])
+        ->paginate($perPage);
     }
 
     public function bulkInsert(Request $request): array
