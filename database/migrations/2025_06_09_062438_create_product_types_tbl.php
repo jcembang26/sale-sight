@@ -19,7 +19,6 @@ return new class extends Migration
                 $table->string('product_type_id')->nullable()->default(null)->primary();
                 $table->text('name')->nullable()->default(null);
                 $table->integer('category_id')->unsigned()->nullable()->default(0);
-                $table->integer('ingredients_id')->unsigned()->nullable()->default(0);
                 $table->softDeletes();
                 $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
                 $table->integer('created_by')->unsigned()->nullable()->default(0);
