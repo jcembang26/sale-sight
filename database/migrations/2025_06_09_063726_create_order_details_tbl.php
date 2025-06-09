@@ -17,7 +17,8 @@ return new class extends Migration
         if (!Schema::hasTable($this->table)) {
             Schema::create('order_details', function (Blueprint $table) {
                 $table->id();
-                $table->integer('product_id')->unsigned()->nullable()->default(0);
+                $table->integer('order_id')->unsigned()->nullable()->default(0);
+                $table->string('product_id')->nullable()->default(null);
                 $table->integer('quantity')->unsigned()->nullable()->default(0);
                 $table->softDeletes();
                 $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
