@@ -9,6 +9,7 @@ class ProductType extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'product_types';
     protected $primaryKey = 'product_type_id';
     public $incrementing = false; // because it's a string, not auto-increment
     protected $keyType = 'string'; // because it's a string, not integer

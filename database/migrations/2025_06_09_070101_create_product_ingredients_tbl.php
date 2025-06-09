@@ -17,7 +17,6 @@ return new class extends Migration
         if (!Schema::hasTable($this->table)) {
             Schema::create($this->table, function (Blueprint $table) {
                 $table->id();
-                $table->unsignedInteger('category_id')->nullable()->default(0);
                 $table->string('name')->nullable();
                 $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
                 $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));

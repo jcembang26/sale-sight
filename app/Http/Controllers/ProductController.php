@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    public function index(Request $request): object
+    {
+        
+        return response()->json('test');
+    }
+
     public function store(ProductInterface $productInterface, Request $request): object
     {
         $request->validate([

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OrderDetailController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductTypeController;
 use App\Http\Controllers\UserController;
@@ -13,6 +15,15 @@ Route::get('/user', function (Request $request) {
 Route::post('/register', [UserController::class, 'register']);
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::post('/store-products', [ProductController::class, 'store']);
+
+    Route::prefix('products')->group(function () {
+        Route::get('/', [ProductController::class, 'index']);
+        Route::post('/store', [ProductController::class, 'store']);
+    });
+    
     Route::post('/store-product-types', [ProductTypeController::class, 'store']);
+
+    Route::post('/store-orders', [OrderController::class, 'store']);
+
+    Route::post('/store-order-details', [OrderDetailController::class, 'store']);
 });

@@ -52,11 +52,10 @@ class ProductTypeService implements ProductTypeInterface
         $payload = $this->processProducts($products);
         $invalidPayload = $payload['invalid'];
         unset($payload['invalid']);
-
         
         foreach ($payload['valid'] as $load) {
             try {
-                ProductType::updateOrCreate(['product_type_id' => $load['product_type_id']], $load);
+                $pt = ProductType::updateOrCreate(['product_type_id' => $load['product_type_id']], $load);
             } catch (\Throwable $th) {
                 $invalidOnUpsert[] = $load;
             }
@@ -74,6 +73,7 @@ class ProductTypeService implements ProductTypeInterface
         $inValid = [];
         $currentUser = Auth::user();
         $productCategoryService = app(ProductCategoryService::class);
+        $ingredientService = app(IngredientService::class);
 
         if(empty($products)){
             return [
@@ -97,6 +97,8 @@ class ProductTypeService implements ProductTypeInterface
                 }else{
                     $payload['created_by'] = $currentUser->id;
                 }
+
+                $ingredientService->store($product['ingredients'], $product['productTypeId']);
 
                 $valid[] = $payload;
             }else{
@@ -124,9 +126,7 @@ class ProductTypeService implements ProductTypeInterface
             'category' => $this->rules['requiredMinString'],
             'ingredients' => 'required|array|min:1'
         ]);
-
-
-
+        
         if (!$validator->fails()) {
             $res = true;
         }
