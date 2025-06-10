@@ -39,5 +39,19 @@ A Laravel + Vue.js application to upload CSV files and interpret them in Dashboa
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/csv-uploader-webapp.git
-cd csv-uploader-webapp
+git clone https://github.com/jcembang26/sale-sight.git
+cd sale-sight
+
+### 2. Install dependencies
+
+```bash
+npm install
+# or
+yarn install
+
+### 3. Run the development server
+
+```bash
+npm run dev
+# or
+yarn dev
