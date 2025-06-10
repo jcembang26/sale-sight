@@ -2,12 +2,16 @@
 
 namespace App\Providers;
 
+use App\Interfaces\CsvUploadInterface;
+use App\Interfaces\DashboardInterface;
 use App\Interfaces\ProductInterface;
 use App\Interfaces\ProductTypeInterface;
 use App\Interfaces\UserInterface;
 use App\Interfaces\OrderDetailInterface;
 use App\Services\OrderDetailService;
 use App\Interfaces\OrderInterface;
+use App\Services\CsvUploadService;
+use App\Services\DashboardService;
 use App\Services\OrderService;
 use App\Services\ProductService;
 use App\Services\ProductTypeService;
@@ -26,6 +30,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(ProductTypeInterface::class, ProductTypeService::class);
         $this->app->bind(OrderInterface::class, OrderService::class);
         $this->app->bind(OrderDetailInterface::class, OrderDetailService::class);
+        $this->app->bind(DashboardInterface::class, DashboardService::class);
     }
 
     /**

@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductTypeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/user', function (Request $request) {
@@ -25,6 +26,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/store', [ProductController::class, 'store']);
     });
     
+    Route::get('/dashboard-summary', [DashboardController::class, 'summary']);
+
     Route::post('/store-product-types', [ProductTypeController::class, 'store']);
 
     Route::post('/store-orders', [OrderController::class, 'store']);

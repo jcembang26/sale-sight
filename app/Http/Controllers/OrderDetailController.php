@@ -21,11 +21,11 @@ class OrderDetailController extends Controller
     {
 
         $request->validate([
-            'orders' => 'required|array',
-            'orders.*.id' => $this->rules['requiredNumeric'],
-            'orders.*.orderId' => $this->rules['requiredNumeric'],
-            'orders.*.productId' => 'required',
-            'orders.*.quantity' => $this->rules['requiredNumeric'],
+            'data' => 'required|array',
+            'data.*.id' => $this->rules['requiredNumeric'],
+            'data.*.orderId' => $this->rules['requiredNumeric'],
+            'data.*.productId' => 'required',
+            'data.*.quantity' => $this->rules['requiredNumeric'],
         ]);
 
         $res = $orderDetailInterface->bulkInsert($request);

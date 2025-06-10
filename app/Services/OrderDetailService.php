@@ -21,7 +21,7 @@ class OrderDetailService implements OrderDetailInterface
 
     public function bulkInsert(Request $request): array
     {
-        $orders = $request->orders ?? [];
+        $orders = $request->data ?? [];
 
         if(empty($orders)){
             return [

@@ -1,22 +1,30 @@
-<!-- src/views/Login.vue -->
+<!-- src/views/Register.vue -->
 <template>
-    <div class="login-page">
-      <h1>Login</h1>
-      <form @submit.prevent="login">
+    <div class="register-page">
+      <h1>Register</h1>
+      <form @submit.prevent="register">
         <div>
           <label>Email:</label>
           <input type="email" v-model="email" required />
         </div>
         <div>
+          <label>Name:</label>
+          <input type="text" v-model="name" required />
+        </div>
+        <div>
           <label>Password:</label>
           <input type="password" v-model="password" required />
         </div>
-        <button type="submit">Login</button>
+        <div>
+          <label>Confirm Password:</label>
+          <input type="password" v-model="password_confirmation" required />
+        </div>
+        <button type="submit">Register</button>
       </form>
   
       <p>
-        Don't have an account?
-        <router-link to="/register">Register here</router-link>
+        Already have an account?
+        <router-link to="/login">Login here</router-link>
       </p>
     </div>
   </template>
@@ -26,29 +34,31 @@
   import axios from 'axios';
   import { useRouter } from 'vue-router';
   
+  const name = ref('');
   const email = ref('');
   const password = ref('');
+  const password_confirmation = ref('');
   
   const router = useRouter();
   
-  const login = async () => {
+  const register = async () => {
     try {
-      const response = await axios.post('/api/login', {
+      await axios.post('/api/register', {
+        name: name.value,
         email: email.value,
         password: password.value,
+        password_confirmation: password_confirmation.value,
       });
-      const token = response.data.token;
-      // Store token (localStorage or Vuex/pinia)
-      localStorage.setItem('token', token);
-      router.push('/dashboard');
+      // Optionally auto-login or redirect to login page
+      router.push('/login');
     } catch (error) {
       console.error(error);
-      alert('Login failed.');
+      alert('Registration failed.');
     }
   };
   </script>
   <style scoped>
-  .login-page {
+  .register-page {
     max-width: 400px;
     margin: 80px auto; /* center */
     padding: 20px;
@@ -59,30 +69,31 @@
     color: #333;
   }
   
-  .login-page h1 {
+  .register-page h1 {
     text-align: center;
     margin-bottom: 20px;
     color: #444;
   }
   
-  .login-page form {
+  .register-page form {
     display: flex;
     flex-direction: column;
   }
   
-  .login-page form > div {
+  .register-page form > div {
     margin-bottom: 15px;
   }
   
-  .login-page label {
+  .register-page label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
   }
   
-  .login-page input[type="email"],
-  .login-page input[type="password"],
-  .login-page button {
+  .register-page input[type="email"],
+  .register-page input[type="text"],
+  .register-page input[type="password"],
+  .register-page button {
     width: 100%;
     padding: 8px;
     box-sizing: border-box;
@@ -91,7 +102,7 @@
     font-size: 14px;
   }
   
-  .login-page button {
+  .register-page button {
     background-color: #4CAF50;
     color: white;
     border: none;
@@ -99,21 +110,21 @@
     transition: background-color 0.2s ease;
   }
   
-  .login-page button:hover {
+  .register-page button:hover {
     background-color: #45a049;
   }
   
-  .login-page p {
+  .register-page p {
     text-align: center;
     margin-top: 15px;
   }
   
-  .login-page a {
+  .register-page a {
     color: #007BFF;
     text-decoration: none;
   }
   
-  .login-page a:hover {
+  .register-page a:hover {
     text-decoration: underline;
   }
   </style>
