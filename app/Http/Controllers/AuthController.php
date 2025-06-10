@@ -9,6 +9,12 @@ use App\Models\User;
 class AuthController extends Controller
 {
 
+    /**
+     * Login and create token for users
+     *
+     * @param Request $request
+     * @return void
+     */
     public function login(Request $request)
     {
         $request->validate([

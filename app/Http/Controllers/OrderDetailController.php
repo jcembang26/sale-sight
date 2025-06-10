@@ -16,7 +16,13 @@ class OrderDetailController extends Controller
         ];
     }
 
-
+    /**
+     * Store data from CSV using OrderDetailService
+     *
+     * @param OrderDetailInterface $orderDetailInterface
+     * @param Request $request
+     * @return object
+     */
     public function store(OrderDetailInterface $orderDetailInterface, Request $request): object
     {
 

@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
+    /**
+     * Store data from CSV using OrderService
+     *
+     * @param OrderInterface $orderInterface
+     * @param Request $request
+     * @return object
+     */
     public function store(OrderInterface $orderInterface, Request $request): object
     {
         $request->validate([

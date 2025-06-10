@@ -14,6 +14,13 @@ class ProductController extends Controller
         return response()->json($res);
     }
 
+    /**
+     * Store data from CSV using ProductService
+     *
+     * @param ProductInterface $productInterface
+     * @param Request $request
+     * @return object
+     */
     public function store(ProductInterface $productInterface, Request $request): object
     {
         $request->validate([

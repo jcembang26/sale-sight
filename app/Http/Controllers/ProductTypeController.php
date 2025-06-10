@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class ProductTypeController extends Controller
 {
+    /**
+     * Store data from CSV using ProductTypeService
+     *
+     * @param ProductTypeInterface $productTypeInterface
+     * @param Request $request
+     * @return object
+     */
     public function store(ProductTypeInterface $productTypeInterface, Request $request): object
     {
         $request->validate([
