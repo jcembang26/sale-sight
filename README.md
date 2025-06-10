@@ -41,17 +41,44 @@ A Laravel + Vue.js application to upload CSV files and interpret them in Dashboa
 ```bash
 git clone https://github.com/jcembang26/sale-sight.git
 cd sale-sight
+```
 
 ### 2. Install dependencies
 
 ```bash
+composer update
+
 npm install
 # or
 yarn install
+```
 
-### 3. Run the development server
+### 3. Create/Update .env variables
+
+```env
+APP_URL=YOUR_SITE_URL
+DB_CONNECTION=CONNECTION_YOU_WANT_TO_USE 
+
+# e.g. mysql
+
+# DB Credentials
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=sale_sight
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+### 4. Generate key
+
+```bash
+php artisan key:generate
+```
+
+### 5. Run the development server
 
 ```bash
 npm run dev
 # or
 yarn dev
+```
