@@ -75,7 +75,16 @@ DB_PASSWORD=
 php artisan key:generate
 ```
 
-### 5. Run the development server
+### 5. DB and Migrations
+
+- Create database name `sale_sight`
+- Run migration
+
+```bash
+php artisan migrate
+```
+
+### 6. Run the development server
 
 ```bash
 npm run dev
