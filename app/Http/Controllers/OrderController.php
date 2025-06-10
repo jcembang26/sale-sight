@@ -10,10 +10,10 @@ class OrderController extends Controller
     public function store(OrderInterface $orderInterface, Request $request): object
     {
         $request->validate([
-            'orders' => 'required|array',
-            'orders.*.id' => 'required',
-            'orders.*.date' => 'required',
-            'orders.*.time' => 'required'
+            'data' => 'required|array',
+            'data.*.id' => 'required',
+            'data.*.date' => 'required',
+            'data.*.time' => 'required'
         ]);
 
         $res = $orderInterface->bulkInsert($request);

@@ -6,6 +6,7 @@ use App\Interfaces\OrderInterface;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class OrderService implements OrderInterface
@@ -21,7 +22,7 @@ class OrderService implements OrderInterface
 
     public function bulkInsert(Request $request): array
     {
-        $orders = $request->orders ?? [];
+        $orders = $request->data ?? [];
 
         if(empty($orders)){
             return [
@@ -38,7 +39,6 @@ class OrderService implements OrderInterface
             try {
                 Order::updateOrCreate(['id' => $load['id']], $load);
             } catch (\Throwable $th) {
-                dd($th->getMessage());
                 $invalidOnUpsert[] = $load;
             }
         }
@@ -47,6 +47,16 @@ class OrderService implements OrderInterface
             'message' => 'Successfully insert orders',
             'failed' => $invalidPayload
         ];
+    }
+
+    public function ordersPerDay(): array
+    {
+        return DB::table('orders')
+        ->selectRaw('date, COUNT(id) as order_count')
+        ->groupBy('date')
+        ->orderBy('date', 'ASC')
+        ->get()
+        ->toArray();
     }
 
     private function processOrders(array $orders = []): array

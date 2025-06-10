@@ -40,7 +40,7 @@ class ProductTypeService implements ProductTypeInterface
 
     public function bulkInsert(Request $request): array
     {
-        $products = $request->products ?? [];
+        $products = $request->data ?? [];
 
         if(empty($products)){
             return [

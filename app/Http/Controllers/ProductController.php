@@ -17,11 +17,11 @@ class ProductController extends Controller
     public function store(ProductInterface $productInterface, Request $request): object
     {
         $request->validate([
-            'products' => 'required|array',
-            'products.*.id' => 'required',
-            'products.*.productTypeId' => 'required',
-            'products.*.size' => 'required',
-            'products.*.price' => 'required|numeric',
+            'data' => 'required|array',
+            'data.*.id' => 'required',
+            'data.*.productTypeId' => 'required',
+            'data.*.size' => 'required',
+            'data.*.price' => 'required|numeric',
         ]);
 
         $res = $productInterface->bulkInsert($request);
