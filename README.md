@@ -27,10 +27,11 @@ A Laravel + Vue.js application to upload CSV files and interpret them in Dashboa
 ---
 
 ## Prerequisites
-
+- PHP 8.2.12
+- XAMPP v3.3.0
+- Laravel installed
 - Node.js (v18 or latest recommended)
 - npm or yarn package manager
-- Backend API running and accessible
 
 ---
 
@@ -53,7 +54,9 @@ npm install
 yarn install
 ```
 
-### 3. Create/Update .env variables
+### 3. Create .env
+
+- Create .env file and copy the content from .env.example then update variables
 
 ```env
 APP_URL=YOUR_SITE_URL
